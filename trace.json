@@ -148,151 +148,127 @@
     "week_number": 2
   },
   {
-    "of_total": 35,
-    "mark": 32,
+    "of_total": 29,
+    "mark": 29,
     "results": [
       {
         "value": 1,
-        "name": "Exercise 0: add_1 - 55 + 1 = 56"
+        "name": "Exercise 1: Loop ranger (3, 8, 1)"
       },
       {
         "value": 1,
-        "name": "Exercise 0: add_1 - -5 + 1 = -4"
+        "name": "Exercise 1: Loop ranger (100, 104, 2)"
       },
       {
         "value": 1,
-        "name": "Exercise 0: add_1 - 0.1 + 1 = 1.1"
+        "name": "Exercise 1: Two step ranger (100, 104)"
       },
       {
         "value": 1,
-        "name": "Exercise 0: add_5 - 55 + 5 = 60"
+        "name": "Exercise 1: Two step ranger (100, 104)"
       },
       {
         "value": 1,
-        "name": "Exercise 0: add_5 - -5 + 5 = 0"
+        "name": "Exercise 1: Stubborn asker"
       },
       {
         "value": 1,
-        "name": "Exercise 0: add_5 - 0.1 + 5 = 5.1"
+        "name": "Exercise 1: Stubborn asker"
       },
       {
         "value": 1,
-        "name": "Exercise 0: adder - 5 + 5 = 10"
+        "name": "Exercise 1: not_number_rejector"
       },
       {
         "value": 1,
-        "name": "Exercise 0: adder - -5 + -5 = -10"
+        "name": "Exercise 1: test_super_asker"
       },
       {
         "value": 1,
-        "name": "Exercise 0: adder - 0.1 + 0.9 = 1"
+        "name": "Exercise 2: example guessing game"
       },
       {
         "value": 1,
-        "name": "Exercise 0: shout - you've => YOU'VE"
+        "name": "Exercise 3: guessing game, U&L"
       },
       {
         "value": 1,
-        "name": "Exercise 0: shout - got => GOT"
+        "name": "Exercise 3: guessing game, polite failures"
       },
       {
         "value": 1,
-        "name": "Exercise 0: shout - to => TO"
+        "name": "Exercise 3: guessing game, lowerBound bigger than upperBound"
       },
       {
         "value": 1,
-        "name": "Exercise 0: shout - fight => FIGHT"
+        "name": "Exercise 3: guessing game, no range to guess in (delta 1)"
       },
       {
         "value": 1,
-        "name": "Exercise 0: shout - for => FOR"
+        "name": "Exercise 3: guessing game, no range to guess in (equal)"
       },
       {
         "value": 1,
-        "name": "Exercise 0: shout - your => YOUR"
+        "name": "Exercise 4: binary_search (low: 1, high: 100, target: 5) Look low"
       },
       {
         "value": 1,
-        "name": "Exercise 0: shout - right => RIGHT"
+        "name": "Exercise 4: binary_search (low: 1, high: 100, target: 6) Look low"
       },
       {
         "value": 1,
-        "name": "Exercise 0: shout - to => TO"
+        "name": "Exercise 4: binary_search (low: 1, high: 100, target: 95) Look high"
       },
       {
         "value": 1,
-        "name": "Exercise 0: shout - party => PARTY"
+        "name": "Exercise 4: binary_search (low: 1, high: 51, target: 5) Look low"
       },
       {
         "value": 1,
-        "name": "Exercise 0: shout_with_a_number - hi, 1 => HI 1"
+        "name": "Exercise 4: binary_search (low: 1, high: 50, target: 5) Look low"
       },
       {
         "value": 1,
-        "name": "Exercise 2: debug the file"
+        "name": "Exercise 4: binary_search (low: 0, high: 100, target: 63) randomly generated test value"
       },
       {
         "value": 1,
-        "name": "Exercise 3: is_odd - is 2 odd"
+        "name": "Exercise 4: binary_search (low: 0, high: 100, target: 28) randomly generated test value"
       },
       {
         "value": 1,
-        "name": "Exercise 3: is_odd - is 5 odd"
+        "name": "Exercise 4: binary_search (low: 0, high: 100, target: 5) randomly generated test value"
       },
       {
         "value": 1,
-        "name": "Exercise 3: fix_it - it moves, and it should  move"
-      },
-      {
-        "value": 0,
-        "name": "Exercise 3: fix_it - it moves, and it should not move"
-      },
-      {
-        "value": 0,
-        "name": "Exercise 3: fix_it - it does not move, and it should  move"
+        "name": "Exercise 4: binary_search (low: 0, high: 100, target: 88) randomly generated test value"
       },
       {
         "value": 1,
-        "name": "Exercise 3: fix_it - it does not move, and it should not move"
+        "name": "Exercise 4: binary_search (low: 0, high: 100, target: 86) randomly generated test value"
       },
       {
         "value": 1,
-        "name": "Exercise 3: loops_1a - 1d for loop"
+        "name": "Exercise 4: binary_search (low: 0, high: 100, target: 88) randomly generated test value"
       },
       {
         "value": 1,
-        "name": "Exercise 3: loops_1c - 1d with arguments"
+        "name": "Exercise 4: binary_search (low: 0, high: 100, target: 33) randomly generated test value"
       },
       {
         "value": 1,
-        "name": "Exercise 3: loops_2 - 10\u00d710 stars"
+        "name": "Exercise 4: binary_search (low: 0, high: 100, target: 51) randomly generated test value"
       },
       {
         "value": 1,
-        "name": "Exercise 3: loops_3 - 10 matching lists"
+        "name": "Exercise 4: binary_search (low: 0, high: 100, target: 35) randomly generated test value"
       },
       {
         "value": 1,
-        "name": "Exercise 3: loops_4 - ten rising lists"
-      },
-      {
-        "value": 1,
-        "name": "Exercise 3: loops_5 - write the coords"
-      },
-      {
-        "value": 1,
-        "name": "Exercise 3: loops_6 - make a wedge"
-      },
-      {
-        "value": 1,
-        "name": "Exercise 3: loops_7 - pyramid of stars"
-      },
-      {
-        "value": 0,
-        "name": "Lab book entry completed"
+        "name": "Exercise 4: binary_search (low: 0, high: 100, target: 78) randomly generated test value"
       }
     ],
-    "week_number": 2
+    "week_number": 3
   },
   "4",
   "5",
