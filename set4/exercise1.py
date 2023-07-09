@@ -11,14 +11,10 @@ import sys
 LOCAL = os.path.dirname(os.path.realpath(__file__))  # the context of this file
 CWD = os.getcwd()  # The curent working directory
 if LOCAL != CWD:
-    print(
-        f"""
-    Be careful that your relative paths are
-    relative to where you think they are
-    LOCAL: {LOCAL}
-    CWD: "CWD
-    """
-    )
+    print("Be careful that your relative paths are")
+    print("relative to where you think they are")
+    print("LOCAL", LOCAL)
+    print("CWD", CWD)
 
 
 def get_some_details():
@@ -28,27 +24,24 @@ def get_some_details():
     Read it in and use the json library to convert it to a dictionary.
     Return a new dictionary that just has the last name, password, and the
     number you get when you add the postcode to the id-value.
-    TIP: Make sure that you add the numbers, not concatenate the strings.
-        E.g. 2000 + 3000 = 5000 not 20003000
+    TIP: Make sure that you add the numbers, not concatinate the strings.
+         E.g. 2000 + 3000 = 5000 not 20003000
     TIP: Keep a close eye on the format you get back. JSON is nested, so you
-        might need to go deep. E.g to get the name title you would need to:
-        data["results"][0]["name"]["title"]
-        Look out for the type of brackets. [] means list and {} means
-        dictionary, you'll need integer indices for lists, and named keys for
-        dictionaries.
+         might need to go deep. E.g to get the name title you would need to:
+         data["results"][0]["name"]["title"]
+         Look out for the type of brackets. [] means list and {} means
+         dictionary, you'll need integer indeces for lists, and named keys for
+         dictionaries.
     """
     json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
-    postcode = int(data["results"][0]["location"]["postcode"])
-    id_value = int(data["results"][0]["id"]["value"])
-    postcode_plus_id = postcode + id_value
-
+    ha = data["results"][0]
     return {
-        "lastName": data["results"][0]["name"]["last"],
-        "password": data["results"][0]["login"]["password"],
-        "postcodePlusID": postcode_plus_id
-    }
+        "lastName": ha["name"]["last"],
+        "password": ha["login"]["password"],
+        "postcodePlusID": int(ha["location"]["postcode"]) + int(ha["id"]["value"])
+        }
 
 
 def wordy_pyramid():
@@ -56,7 +49,8 @@ def wordy_pyramid():
 
     There is a random word generator here:
     https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength=20
-    The generator takes a single argument, length (`wordlength`) of the word.
+    The arguments that the generator takes is the minLength and maxLength of the word
+    as well as the limit, which is the the number of words. 
     Visit the above link as an example.
     Use this and the requests library to make a word pyramid. The shortest
     words they have are 3 letters long and the longest are 20. The pyramid
@@ -83,63 +77,56 @@ def wordy_pyramid():
     "Nereis",
     "Leto",
     ]
-    TIP: to add an argument to a URL, use: ?argName=argVal e.g. &wordlength=
+    TIP: to add an argument to a URL, use: ?argName=argVal e.g. &minLength=
     """
+    lista = []
+    for i in range(3, 20, 2):
+        answer = requests.get(f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={i}")
+        print(answer.text)
+        lista.append(answer.text)
+    for i in range(20, 3, -2):
+        answer = requests.get(f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={i}")
+        print(answer.text)
+        lista.append(answer.text)
+    return lista
+    
 
-    pyramid = []
-    base_length = 3
-    top_length = 20
-    step = 2
-
-    for length in range(base_length, top_length + 1, step):
-        url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={length}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            word = response.text.strip()
-            pyramid.append(word)
-
-    return pyramid
-
-
-
+    
 
 def pokedex(low=1, high=5):
-    """Return the name, height and weight of the tallest pokemon in the range low to high.
+    """ Return the name, height and weight of the tallest pokemon in the range low to high.
 
     Low and high are the range of pokemon ids to search between.
     Using the Pokemon API: https://pokeapi.co get some JSON using the request library
     (a working example is filled in below).
     Parse the json and extract the values needed.
-
+    
     TIP: reading json can someimes be a bit confusing. Use a tool like
-        http://www.jsoneditoronline.org/ to help you see what's going on.
+         http://www.jsoneditoronline.org/ to help you see what's going on.
     TIP: these long json accessors base["thing"]["otherThing"] and so on, can
-        get very long. If you are accessing a thing often, assign it to a
-        variable and then future access will be easier.
+         get very long. If you are accessing a thing often, assign it to a
+         variable and then future access will be easier.
     """
-    tallest_pokemon_height = 0
-    tallest_pokemon_name = ""
-    tallest_pokemon_weight = 0
+    template = "https://pokeapi.co/api/v2/pokemon/{id}"
 
-    for pokemon_id in range(low, high + 1):
-        url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_id}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            pokemon_data = json.loads(response.text)
-            pokemon_name = pokemon_data["name"]
-            pokemon_height = pokemon_data["height"]
-            pokemon_weight = pokemon_data["weight"]
+    tallest = 0
+    listp = []
+    for a in range(low, high):
+        url = template.format(id=a)
+        r = requests.get(url)
+        if r.status_code is 200:
+            the_json = json.loads(r.text)
+            listp.append(the_json)
 
-            if pokemon_height > tallest_pokemon_height:
-                tallest_pokemon_height = pokemon_height
-                tallest_pokemon_name = pokemon_name
-                tallest_pokemon_weight = pokemon_weight
+    for i in listp:
+        height_atm = i["height"]
+        if height_atm > tallest:
+            tallest = height_atm
+            name = i["name"]
+            weight = i["weight"]
+            height = i["height"]
 
-    return {
-        "name": tallest_pokemon_name,
-        "height": tallest_pokemon_height,
-        "weight": tallest_pokemon_weight,
-    }
+    return {"name": name, "weight": weight, "height": height}
 
 
 def diarist():
