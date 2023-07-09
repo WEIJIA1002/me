@@ -28,24 +28,29 @@ def get_some_details():
     Read it in and use the json library to convert it to a dictionary.
     Return a new dictionary that just has the last name, password, and the
     number you get when you add the postcode to the id-value.
-    TIP: Make sure that you add the numbers, not concatinate the strings.
+    TIP: Make sure that you add the numbers, not concatenate the strings.
         E.g. 2000 + 3000 = 5000 not 20003000
     TIP: Keep a close eye on the format you get back. JSON is nested, so you
         might need to go deep. E.g to get the name title you would need to:
         data["results"][0]["name"]["title"]
         Look out for the type of brackets. [] means list and {} means
-        dictionary, you'll need integer indeces for lists, and named keys for
+        dictionary, you'll need integer indices for lists, and named keys for
         dictionaries.
     """
     json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
-    return {"lastName":       None,
-            "password":       None,
-            "postcodePlusID": None
-            }
+    postcode = int(data["results"][0]["location"]["postcode"])
+    id_value = int(data["results"][0]["id"]["value"])
+    postcode_plus_id = postcode + id_value
 
-import requests
+    return {
+        "lastName": data["results"][0]["name"]["last"],
+        "password": data["results"][0]["login"]["password"],
+        "postcodePlusID": postcode_plus_id
+    }
+
+
 def wordy_pyramid():
     """Make a pyramid out of real words.
 
@@ -80,13 +85,11 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. &wordlength=
     """
-    import requests
 
     pyramid = []
     base_length = 3
     top_length = 20
     step = 2
-
 
     for length in range(base_length, top_length + 1, step):
         url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={length}"
