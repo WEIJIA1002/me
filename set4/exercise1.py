@@ -40,11 +40,10 @@ def get_some_details():
     json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
-    last_name = data["results"][0]["name"]["last"]
-    password = data["results"][0]["login"]["password"]
-    postcode_plus_id = int(data["results"][0]["location"]["postcode"]) + int(data["results"][0]["id"]["value"])
-
-    return {"lastName": last_name, "password": password, "postcodePlusID": postcode_plus_id}
+    return {"lastName":       None,
+            "password":       None,
+            "postcodePlusID": None
+            }
 
 import requests
 def wordy_pyramid():
@@ -81,13 +80,15 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. &wordlength=
     """
+    import requests
+
     pyramid = []
     base_length = 3
     top_length = 20
     step = 2
 
 
-    for length in range(base_length, top_length - step + 1, step):
+    for length in range(base_length, top_length + 1, step):
         url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={length}"
         response = requests.get(url)
         if response.status_code == 200:
@@ -95,6 +96,8 @@ def wordy_pyramid():
             pyramid.append(word)
 
     return pyramid
+
+
 
 
 def pokedex(low=1, high=5):
@@ -136,10 +139,6 @@ def pokedex(low=1, high=5):
     }
 
 
-import os
-
-LOCAL = "/path/to/local"  # Replace with the correct value
-
 def diarist():
     """Read gcode and find facts about it.
 
@@ -157,6 +156,7 @@ def diarist():
 
     NOTE: this function doesn't return anything. It has the _side effect_ of modifying the file system
     """
+    pass
     gcode_file_path = LOCAL + "/Trispokedovetiles(laser).gcode"
     with open(gcode_file_path, "r") as file:
         gcode_content = file.read()
@@ -168,18 +168,19 @@ def diarist():
         file.write(str(laser_on_off_count))
 
 
+
 if __name__ == "__main__":
-    # print(get_some_details())  # Commented out as get_some_details() is undefined
+    print(get_some_details())
 
-    # wp = wordy_pyramid()  # Commented out as wordy_pyramid() is undefined
-    # [print(f"{word} {len(word)}") for word in wp]
+    wp = wordy_pyramid()
+    [print(f"{word} {len(word)}") for word in wp]
 
-    # print(pokedex(low=3, high=7))  # Commented out as pokedex() is undefined
+    print(pokedex(low=3, high=7))
 
     diarist()
 
-    in_root = os.path.isfile(LOCAL + "/lasers.pew")
-    in_set4 = os.path.isfile(LOCAL + "/set4/lasers.pew")
+    in_root = os.path.isfile("lasers.pew")
+    in_set4 = os.path.isfile("set4/lasers.pew")
     if not in_set4 and not in_root:
         print("diarist did not create lasers.pew")
     elif not in_set4 and in_root:
