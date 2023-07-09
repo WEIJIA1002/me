@@ -142,6 +142,8 @@ def pokedex(low=1, high=5):
     }
 
 
+import os
+
 def diarist():
     """Read gcode and find facts about it.
 
@@ -159,7 +161,6 @@ def diarist():
 
     NOTE: this function doesn't return anything. It has the _side effect_ of modifying the file system
     """
-    pass
     gcode_file_path = LOCAL + "/Trispokedovetiles(laser).gcode"
     with open(gcode_file_path, "r") as file:
         gcode_content = file.read()
@@ -171,10 +172,7 @@ def diarist():
         file.write(str(laser_on_off_count))
 
 
-
 if __name__ == "__main__":
-    print(get_some_details())
-
     wp = wordy_pyramid()
     [print(f"{word} {len(word)}") for word in wp]
 
