@@ -25,13 +25,13 @@ def get_some_details():
     Return a new dictionary that just has the last name, password, and the
     number you get when you add the postcode to the id-value.
     TIP: Make sure that you add the numbers, not concatinate the strings.
-         E.g. 2000 + 3000 = 5000 not 20003000
+        E.g. 2000 + 3000 = 5000 not 20003000
     TIP: Keep a close eye on the format you get back. JSON is nested, so you
-         might need to go deep. E.g to get the name title you would need to:
-         data["results"][0]["name"]["title"]
-         Look out for the type of brackets. [] means list and {} means
-         dictionary, you'll need integer indeces for lists, and named keys for
-         dictionaries.
+        might need to go deep. E.g to get the name title you would need to:
+        data["results"][0]["name"]["title"]
+        Look out for the type of brackets. [] means list and {} means
+        dictionary, you'll need integer indeces for lists, and named keys for
+        dictionaries.
     """
     json_data = open(LOCAL + "/lazyduck.json").read()
 
@@ -134,8 +134,7 @@ def diarist():
 
     Read in Trispokedovetiles(laser).gcode and count the number of times the
     laser is turned on and off. That's the command "M10 P1".
-    Write the answer (a number) to a file called 'lasers.pew' in the Set4 directory.
-
+    Write the answer (a number) to a file called 'lasers.pew' in the week4 directory.
     TIP: you need to write a string, so you'll need to cast your number
     TIP: Trispokedovetiles(laser).gcode uses windows style line endings. CRLF
         not just LF like unix does now. If your comparison is failing this
@@ -143,41 +142,29 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
         the test will have nothing to look at.
     TIP: this might come in handy if you need to hack a 3d print file in the future.
-
-    NOTE: this function doesn't return anything. It has the _side effect_ of modifying the file system
     """
-    file_path = "set4/Trispokedovetiles(laser).gcode"
-    count = 0
 
-    with open(file_path, "r") as file:
-        lines = file.readlines()
-        for line in lines:
-            if "M10 P1" in line:
-                count += 1
+    file1 = open(LOCAL + "/Trispokedovetiles(laser).gcode" , "r")
+    numberct = 0
+    for line in file1:
+        if "M10 P1" in line:
+            numberct += 1
 
-    count_str = str(count)
-
-    with open("set4/lasers.pew", "w") as output_file:
-        output_file.write(count_str)
+    lasers = open(LOCAL + "/lasers.pew" , "w")
+    lasers.write(str(numberct))
+    lasers.close()
 
 
 if __name__ == "__main__":
-    print(get_some_details())
-
-    wp = wordy_pyramid()
-    [print(f"{word} {len(word)}") for word in wp]
-
-    print(pokedex(low=3, high=7))
-
-    diarist()
-
-    in_root = os.path.isfile("lasers.pew")
-    in_set4 = os.path.isfile("set4/lasers.pew")
-    if not in_set4 and not in_root:
+    functions = [
+        obj
+        for name, obj in inspect.getmembers(sys.modules[__name__])
+        if (inspect.isfunction(obj))
+    ]
+    for function in functions:
+        try:
+            print(function())
+        except Exception as e:
+            print(e)
+    if not os.path.isfile("lasers.pew"):
         print("diarist did not create lasers.pew")
-    elif not in_set4 and in_root:
-        print(
-            "diarist did create lasers.pew, but in the me folder, it should be in the set4 folder"
-        )
-    elif in_set4:
-        print("lasers.pew is in the right place")
