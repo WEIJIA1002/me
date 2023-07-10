@@ -102,10 +102,10 @@ def pokedex(low=1, high=5):
     Parse the json and extract the values needed.
     
     TIP: reading json can someimes be a bit confusing. Use a tool like
-         http://www.jsoneditoronline.org/ to help you see what's going on.
+        http://www.jsoneditoronline.org/ to help you see what's going on.
     TIP: these long json accessors base["thing"]["otherThing"] and so on, can
-         get very long. If you are accessing a thing often, assign it to a
-         variable and then future access will be easier.
+        get very long. If you are accessing a thing often, assign it to a
+        variable and then future access will be easier.
     """
     template = "https://pokeapi.co/api/v2/pokemon/{id}"
 
@@ -153,6 +153,8 @@ def diarist():
     lasers = open(LOCAL + "/lasers.pew" , "w")
     lasers.write(int(numberct))
     lasers.close()
+
+    return "Success"
 
 
 if __name__ == "__main__":
